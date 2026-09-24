@@ -12,7 +12,7 @@ from src.main.api.models.transfer_request import TransferRequest
 @allure.feature("Accounts")
 @pytest.mark.api
 class TestTransferBetweenAccounts:
-##
+
     @allure.title("Перевод между счетами")
     @allure.description(
         "Проверка: позитивный сценарий перевод с акк1 на акк2"
