@@ -19,3 +19,10 @@ class UserCrudDb:
         db.commit()
         db.refresh(user)
         return user
+
+    @staticmethod
+    def delete_user(db: Session, user_id: int) -> None:
+        user = db.get(User, user_id)
+        if user:
+            db.delete(user)
+            db.commit()

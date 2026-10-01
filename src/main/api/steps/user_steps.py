@@ -6,8 +6,8 @@ from src.main.api.models.create_credit_user_request import CreateCreditUserReque
 from src.main.api.models.create_deposit_request import CreateDepositRequest
 from src.main.api.models.create_user_request import CreateUserRequest
 from src.main.api.models.transfer_request import TransferRequest
-from src.main.api.sepcs.request_specs import RequestSpecs
-from src.main.api.sepcs.response_specs import ResponseSpecs
+from src.main.api.specs.request_specs import RequestSpecs
+from src.main.api.specs.response_specs import ResponseSpecs
 from src.main.api.steps.base_steps import BaseSteps
 
 

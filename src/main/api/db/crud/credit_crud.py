@@ -11,3 +11,10 @@ class CreditCrudDb:
             .filter(Credit.id == credit_id)
             .first()
         )
+
+    @staticmethod
+    def delete_credit(db: Session, credit_id: int) -> None:
+        credit = db.get(Credit, credit_id)
+        if credit:
+            db.delete(credit)
+            db.commit()
