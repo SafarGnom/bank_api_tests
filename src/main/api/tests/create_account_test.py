@@ -15,14 +15,12 @@ class TestCreateAccount:
         "Проверка: позитивный сценарий - открытие счета"
     )
     def test_account_creation(self, db_session: Session, api_manager: ApiManager,
-                              create_user_request: CreateUserRequest):
+                              create_user_request: CreateUserRequest, create_user_account):
 
-        response = api_manager.user_steps.create_account(create_user_request)
+        assert create_user_account.balance == 0
 
-        assert response.balance == 0
-
-        account_from_db = Account.get_account_id(db_session, response.id)
-        assert account_from_db.id == response.id, 'aкк не создан, акк нет в бд'
+        account_from_db = Account.get_account_id(db_session, create_user_account.id)
+        assert account_from_db.id == create_user_account.id, 'aкк не создан, акк нет в бд'
         assert account_from_db.balance is not None, 'Поле баланса для созданного пользака отсутсвует в бд'
 
 
@@ -34,10 +32,10 @@ class TestCreateAccount:
         "более двух банковских счетов"
     )
     def test_account_creation_invalid(self,db_session: Session,api_manager: ApiManager,
-            create_user_request: CreateUserRequest):
+            create_user_request: CreateUserRequest, create_two_accounts):
 
 
-        account_1 = api_manager.user_steps.create_account(create_user_request)
+        account_1, account_2 = create_two_accounts
 
         assert account_1.balance == 0
 
@@ -45,8 +43,6 @@ class TestCreateAccount:
 
         assert account_1_from_db is not None
         assert account_1_from_db.id == account_1.id
-
-        account_2 = api_manager.user_steps.create_account(create_user_request)
 
         assert account_2.balance == 0
 
@@ -58,6 +54,10 @@ class TestCreateAccount:
         third_response = api_manager.user_steps.create_account_bad(create_user_request)
 
         assert third_response.json()["error"] == ("User already has maximum number of accounts(2)")
+
+
+
+
 
 
 

@@ -20,6 +20,11 @@ class TestUserLogin:
         assert login_user_request.username == response.user.username
         assert response.user.role == "ROLE_ADMIN"
 
+
+
+
+
+
     @allure.title("Создание нового пользователя роль ROLE_USER")
     @allure.description(
         "Проверка: позитивного сценария"
